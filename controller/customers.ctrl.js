@@ -10,14 +10,14 @@ const customersController = {
 				const return_data = {
 					total: response.length,
 					message: "OK",
-					users: response
+					orders: response
 				};
 				const endTime = Date.now();
-				logger.info("handleGetUserList succeeded in: ", endTime - startTime, "ms");
+				logger.info("handleGetCustomersOrders succeeded in: ", endTime - startTime, "ms");
 				res.status(200).send(return_data);
 			})
 			.catch(err => {
-				logger.error("Error handleGetUserList: ", err);
+				logger.error("Error handleGetCustomersOrders: ", err);
 				res.status(500).send("Error");
 			});
 	},
