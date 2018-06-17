@@ -36,5 +36,6 @@ module.exports.runQuery = (query, values) => {
 
 module.exports.TABLE_NAME = {
 	"CUSTOMERS": "customers",
-	"ORDERS": "orders"
+	"ORDERS": "orders",
+	"ADDRESSES": "addresses"
 };
