@@ -1,17 +1,12 @@
 #!/bin/bash
-#This file is used to install mysql database for the development process
-#It will drop all tables in the "seaquestion" database then use file models/schema.sql to create all table again
-#!!!!Warning: Question that it use only for the development process because it will drop all tables in database
-#when it run
 
-DB_NAME="crawldb"
-DB_USER="crawler"
-DB_PASS="crawler"
-DB_ROOT_PASS="root"
+DB_NAME="test"
+DB_USER="test"
+DB_PASS="test"
+DB_ROOT_PASS=""
 
-#echo "Enter root password:"
-#read -s DB_ROOT_PASS
-
+echo "Enter root password:"
+read -s DB_ROOT_PASS
 
 SQL_DB_CREATED="SELECT COUNT(1) FROM information_schema.schemata WHERE SCHEMA_NAME = '$DB_NAME';"
 SQL_USER_CREATED="SELECT COUNT(1) FROM mysql.user WHERE user = '$DB_USER';"
@@ -19,21 +14,20 @@ SQL_USER_CREATED="SELECT COUNT(1) FROM mysql.user WHERE user = '$DB_USER';"
 SQL_CREATE_DB="CREATE DATABASE $DB_NAME CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
 SQL_CREATE_USER="CREATE USER '$DB_USER'@'localhost' IDENTIFIED BY '$DB_PASS';"
 
-echo "Command to create seanote user: " $SQL_CREATE_USER
+echo "Command to create db user: " $SQL_CREATE_USER
 
 SQL_GRANT_ACCESS="GRANT ALL PRIVILEGES ON $DB_NAME.* TO '$DB_USER'@'localhost';"
 SQL_DROP_DB="DROP DATABASE $DB_NAME;"
 SQL_CLEAR_FOREIGN_KEY_CHECK="SET FOREIGN_KEY_CHECKS = 0;"
 
-#If "seanote" db is created
 EXE_SQL=$(mysql -u root -p$DB_ROOT_PASS -e "$SQL_DB_CREATED")
 IS_DB_CREATED=$(echo -n "$EXE_SQL" | tail -c 1)
-echo "is seanote db created?" $IS_DB_CREATED
+echo "Was db created?" $IS_DB_CREATED
 
 #if "admin" user is created
 EXE_SQL=$(mysql -u root -p$DB_ROOT_PASS -e "$SQL_USER_CREATED")
 IS_USER_CREATED=$(echo -n "$EXE_SQL" | tail -c 1)
-echo "is admin user created?" $IS_USER_CREATED
+echo "Was admin user created?" $IS_USER_CREATED
 
 #Utility functions
 function execute_query_with_root {
