@@ -5,18 +5,17 @@ const should = chai.should();
 
 chai.use(chaiHttp);
 
-describe("USER APIs", () => {
-	it("should lsit all users available", (done) => {
+describe("Order APIs", () => {
+	it("should list all users available", (done) => {
 		chai.request(server)
-			.get("/v1/users")
+			.get("/v1/customers/H1RWL-VZm/orders")
 			.end((err, res) => {
 				res.should.have.status(200);
 				res.body.should.be.a("object");
 				res.body.should.have.property("total");
-				res.body.should.have.property("users");
+				res.body.should.have.property("orders");
 				res.body.should.have.property("message").eql("OK");
-
-				res.body.users.should.be.a("array");
+				res.body.orders.should.be.a("array");
 				res.body.users.length.should.be.eql(res.body.total);
 				done();
 			});
