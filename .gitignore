@@ -1,0 +1,11 @@
+node_modules/*
+**/.DS_Store
+.DS_Store
+public/*
+logs/*.txt
+!public/img/
+!public/styles/
+!public/vendor/
+!public/index.html
+npm-debug.log
+yarn.lock

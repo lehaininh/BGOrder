@@ -1,0 +1,30 @@
+Friday Jun16
+1. Adding table beyond_credential:
+	- shared_key varchar(255) NOT NULL,
+	- secret_key varchar(255) NOT NULL,
+	- api_server varchar(1000) NOT NULL,
+	- last_get_date timestamp
+2. Adding table kajomi_credentiale:
+	- shared_key varchar(255) NOT NULL,
+	- secret_key varchar(255) NOT NULL,
+	- api_server varchar(1000) NOT NULL,
+	- last_get_date timestamp
+3. Adding table sendout:
+	- `id` varchar(20) NOT NULL,
+	- `name` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+	- `subject` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+	- `sender` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+	- `audience` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+	- `template_url` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+	- `unit_cost` float,
+	- `mailing_system` varchar(20),
+	- `mailing_system_identifier` varchar(255),
+	- `openning` int(11),
+	- `openner` int(11),
+	- `click` int(11),
+	- `clicker` int(11),
+	- `sent_mails` int(11),
+	- `saved` tinyint(1) DEFAULT '0',
+	- `send_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	- `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	- `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,

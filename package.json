@@ -1,0 +1,36 @@
+{
+  "name": "BGOrder",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon server.js",
+    "dbsetup-local": "chmod +x ./scripts/dbsetup_local.sh && ./scripts/dbsetup_local.sh",
+    "dbmigration-local": "chmod +x ./scripts/migrate_local.sh && ./scripts/migrate_local.sh",
+    "dbmigration-production": "chmod +x ./scripts/migrate_production.sh && ./scripts/migrate_production.sh",
+    "eslint": "chmod +x ./config/pre-commit && ./config/pre-commit"
+  },
+  "pre-commit": [
+    "eslint"
+  ],
+  "dependencies": {
+    "aws-sdk": "^2.167.0",
+    "axios": "^0.16.2",
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "moment": "^2.19.1",
+    "morgan": "^1.8.2",
+    "mysql": "^2.13.0",
+    "nodemon": "^1.11.0",
+    "request": "^2.83.0",
+    "request-promise": "^4.2.2",
+    "shortid": "^2.2.8",
+    "winston": "^2.3.1",
+    "x2js": "^3.1.1"
+  },
+  "devDependencies": {
+    "eslint": "^3.19.0",
+    "eslint-plugin-jquery": "^1.3.1",
+    "pre-commit": "^1.2.2"
+  }
+}
