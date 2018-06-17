@@ -35,13 +35,6 @@ module.exports.runQuery = (query, values) => {
 };
 
 module.exports.TABLE_NAME = {
-	"CRM_CREDENTIAL": "crm_credential",
-	"CRM_ACCOUNT": "crm_account",
-	"CRM_USER": "crm_user",
-	"CRM_CAMPAIGN": "crm_campaign",
-	"CRM_TASK": "crm_task",
-
-	"BEYOND_CREDENTIAL": "beyond_credential",
-	"KAJOMI_CREDENTIAL": "kajomi_credential",
-	"SENDOUT": "sendout"
+	"CUSTOMERS": "customers",
+	"ORDERS": "orders"
 };

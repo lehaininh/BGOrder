@@ -2,9 +2,9 @@ const config = {
 	"CORS": "*",
 	"DATABASE": {
 		"HOST": "localhost",
-		"USER": "crawler",
-		"PASSWORD": "crawler",
-		"NAME": "crawldb"
+		"USER": "test",
+		"PASSWORD": "test",
+		"NAME": "test"
 	},
 	"SUGAR": {
 		"platform": "local"
