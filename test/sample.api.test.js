@@ -34,4 +34,18 @@ describe("Order APIs", () => {
 				done();
 			});
 	});
+	it("should get order with ID = SJAIObVWX", (done) => {
+		chai.request(server)
+			.get("/v1/orders/SJAIObVWX")
+			.end((err, res) => {
+				res.should.have.status(200);
+				res.body.should.be.a("object");
+				res.body.should.have.property("total");
+				res.body.should.have.property("orders");
+				res.body.should.have.property("message").eql("OK");
+				res.body.orders.should.be.a("array");
+				res.body.orders.length.should.be.eql(res.body.total);
+				done();
+			});
+	});
 });
