@@ -32,6 +32,22 @@ const ordersModel = {
 			return Promise.resolve([]);
 		}
 	},
+
+	getOrdersByAddressID: address_id => {
+		if (address_id) {
+			const query =
+				`SELECT * FROM ${TABLE_NAME.ORDERS}
+				WHERE address_id = ? AND is_enabled = 1`;
+			const values = address_id;
+			return dbUtil.runQuery(query, values)
+				.then(orders => {
+					const order_ids = orders.map(order => order.id);
+					return ordersModel.getOrderByOrderIDs(order_ids);
+				});
+		} else {
+			return Promise.resolve([]);
+		}
+	},
 };
 
 module.exports = ordersModel;
