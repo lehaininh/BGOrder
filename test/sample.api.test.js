@@ -102,3 +102,20 @@ describe("Reports APIs", () => {
 			});
 	});
 });
+
+describe("Customers APIs", () => {
+	it("should get customer with ID = SJIH8ZVZ7", (done) => {
+		chai.request(server)
+			.get("/v1/customers/SJIH8ZVZ7")
+			.end((err, res) => {
+				res.should.have.status(200);
+				res.body.should.be.a("object");
+				res.body.should.have.property("total");
+				res.body.should.have.property("customers");
+				res.body.should.have.property("message").eql("OK");
+				res.body.customers.should.be.a("array");
+				res.body.customers.length.should.be.eql(1);
+				done();
+			});
+	});
+});
