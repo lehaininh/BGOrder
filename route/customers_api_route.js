@@ -4,6 +4,7 @@ const logger = require("../util/logger.js");
 const customersController = require("../controller/customers.ctrl.js");
 
 router.get("/:customer_id/orders", customersController.handleGetCustomersOrders);
+router.get("/:customer_id/spending", customersController.handleGetCustomersSpending);
 router.get("/:customer_id", customersController.handleGetCustomerByID);
 
 router.put("/:customer_id", customersController.handleUpdateCustomerByID);

@@ -11,6 +11,21 @@ const customersService = {
 			});
 	},
 
+	getCustomerSpending: customer_id => {
+		return customersService.getOrdersByCustomerID(customer_id)
+			.then(orders => {
+				const spending = {};
+				orders.forEach(order => {
+					if (spending[order.currency]) {
+						spending[order.currency] += order.price;
+					} else {
+						spending[order.currency] = order.price;
+					}
+				});
+				return spending;
+			});
+	},
+
 	getCustomersByIDs: customer_ids => {
 		return customersModel.getCustomersByIDs(customer_ids);
 	},
