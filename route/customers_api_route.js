@@ -3,6 +3,8 @@ const router = express.Router();
 const logger = require("../util/logger.js");
 const customersController = require("../controller/customers.ctrl.js");
 
+router.get("/byitems", customersController.handleGetCustomerByItemBought);
+router.get("/:customer_id", customersController.handleGetCustomerByID);
 router.get("/:customer_id/orders", customersController.handleGetCustomersOrders);
 router.get("/:customer_id/spending", customersController.handleGetCustomersSpending);
 router.get("/:customer_id", customersController.handleGetCustomerByID);

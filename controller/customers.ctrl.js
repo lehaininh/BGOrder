@@ -22,6 +22,27 @@ const customersController = {
 			});
 	},
 
+	handleGetCustomerByItemBought: (req, res) => {
+		const startTime = Date.now();
+		const { item_id } = req.query;
+		customersService.getCustomersByItemBought(item_id)
+			.then(response => {
+				const return_data = {
+					total: response.length,
+					message: "OK",
+					customers: response
+				};
+				const endTime = Date.now();
+				logger.info("handleGetCustomerByItemBought succeeded in: ",
+					endTime - startTime, "ms");
+				res.status(200).send(return_data);
+			})
+			.catch(err => {
+				logger.error("Error handleGetCustomerByItemBought: ", err);
+				res.status(500).send("Error");
+			});
+	},
+
 	handleGetCustomersSpending: (req, res) => {
 		const startTime = Date.now();
 		const { customer_id } = req.params;

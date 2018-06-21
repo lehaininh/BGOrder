@@ -26,6 +26,14 @@ const customersService = {
 			});
 	},
 
+	getCustomersByItemBought: item_id => {
+		return ordersModel.getOrdersByItemID(item_id)
+			.then(orders => {
+				const customer_ids = orders.map(order => order.customer_id);
+				return customersService.getCustomersByIDs(customer_ids);
+			});
+	},
+
 	getCustomersByIDs: customer_ids => {
 		return customersModel.getCustomersByIDs(customer_ids);
 	},

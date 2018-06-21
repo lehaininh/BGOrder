@@ -73,6 +73,22 @@ const ordersModel = {
 		}
 	},
 
+	getOrdersByItemID: item_id => {
+		if (item_id) {
+			const query =
+				`SELECT * FROM ${TABLE_NAME.ORDERS}
+				WHERE item_id = ? AND is_enabled = 1`;
+			const values = item_id;
+			return dbUtil.runQuery(query, values)
+				.then(orders => {
+					const order_ids = orders.map(order => order.id);
+					return ordersModel.getOrderByOrderIDs(order_ids);
+				});
+		} else {
+			return Promise.resolve([]);
+		}
+	},
+
 	updateOrder: (order_id, order) => {
 		const query =
 			`UPDATE ${TABLE_NAME.ORDERS}
