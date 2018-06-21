@@ -118,4 +118,28 @@ describe("Customers APIs", () => {
 				done();
 			});
 	});
+	it("should delete customer with ID = SJIH8ZVZ7", (done) => {
+		chai.request(server)
+			.delete("/v1/customers/SJIH8ZVZ7")
+			.end((err, res) => {
+				res.should.have.status(200);
+				res.body.should.be.a("object");
+				res.body.should.have.property("total");
+				res.body.should.have.property("customers");
+				res.body.should.have.property("message").eql("OK");
+				res.body.customers.should.be.a("array");
+				res.body.customers.length.should.be.eql(0);
+				done();
+			});
+	});
+
+	it("should give error trying to delete customer with ID = abcdef", (done) => {
+		chai.request(server)
+			.delete("/v1/customers/abcdef")
+			.end((err, res) => {
+				res.should.have.status(500);
+				res.error.text.should.be.a("string");
+				done();
+			});
+	});
 });
