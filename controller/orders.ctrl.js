@@ -65,6 +65,30 @@ const addressesController = {
 					res.status(500).send("Error");
 				}
 			});
+	},
+
+	handleDeleteOrderByID: (req, res) => {
+		const startTime = Date.now();
+		const { order_id } = req.params;
+		ordersService.deleteOrder(order_id)
+			.then(response => {
+				const return_data = {
+					total: response.length,
+					message: "OK",
+					orders: response
+				};
+				const endTime = Date.now();
+				logger.info("handleDeleteOrderByID succeeded in: ", endTime - startTime, "ms");
+				res.status(200).send(return_data);
+			})
+			.catch(err => {
+				logger.error("Error handleDeleteOrderByID: ", err);
+				if (err.client_message) {
+					res.status(500).send(err.client_message);
+				} else {
+					res.status(500).send("Error");
+				}
+			});
 	}
 };
 

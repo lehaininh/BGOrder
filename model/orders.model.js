@@ -80,6 +80,14 @@ const ordersModel = {
 		const values = [order.customer_id, order.address_id, order.item_id, order_id];
 		return dbUtil.runQuery(query, values)
 			.then(() => ordersModel.getOrderByOrderIDs([order_id]));
+	},
+
+	deleteOrder: order_id => {
+		const query =
+			`UPDATE ${TABLE_NAME.ORDERS}
+			SET is_enabled = 0 WHERE id = ?`;
+		const values = order_id;
+		return dbUtil.runQuery(query, values);
 	}
 };
 

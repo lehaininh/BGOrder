@@ -27,6 +27,20 @@ const ordersService = {
 				}
 			});
 	},
+
+	deleteOrder: order_id => {
+		return ordersService.getOrderByOrderIDs([order_id])
+			.then(orders => {
+				if (orders && orders.length) {
+					return ordersModel.deleteOrder(order_id);
+				} else {
+					throw {
+						"client_message": `Order ${order_id} doesn't exist`
+					};
+				}
+			})
+			.then(() => ordersService.getOrderByOrderIDs([order_id]));
+	}
 };
 
 module.exports = ordersService;
