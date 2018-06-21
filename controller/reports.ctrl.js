@@ -1,16 +1,15 @@
 const logger = require("../util/logger.js");
-const ordersService = require("../service/orders.service.js");
+const reportsService = require("../service/reports.service.js");
 
 const addressesController = {
 	handleGetDefaultItemReport: (req, res) => {
 		const startTime = Date.now();
-		const { order } = req.body;
-		ordersService.createOrder(order)
+		reportsService.getItemReport()
 			.then(response => {
 				const return_data = {
 					total: response.length,
 					message: "OK",
-					orders: response
+					items: response
 				};
 				const endTime = Date.now();
 				logger.info("handleGetDefaultItemReport succeeded in: ",
