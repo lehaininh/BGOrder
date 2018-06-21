@@ -19,6 +19,15 @@ const customersModel = {
 		}
 	},
 
+	updateCustomerByID: (customer_id, customer) => {
+		const query =
+			`UPDATE ${TABLE_NAME.CUSTOMERS}
+			SET customer_name = ? WHERE id = ?`;
+		const values = [customer.customer_name, customer_id];
+		return dbUtil.runQuery(query, values)
+			.then(() => customersModel.getCustomersByIDs([customer_id]));
+	},
+
 	deleteCustomerByID: customer_id => {
 		const query =
 			`UPDATE ${TABLE_NAME.CUSTOMERS}

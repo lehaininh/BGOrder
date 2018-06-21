@@ -132,7 +132,6 @@ describe("Customers APIs", () => {
 				done();
 			});
 	});
-
 	it("should give error trying to delete customer with ID = abcdef", (done) => {
 		chai.request(server)
 			.delete("/v1/customers/abcdef")

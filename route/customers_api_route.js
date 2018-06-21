@@ -6,6 +6,8 @@ const customersController = require("../controller/customers.ctrl.js");
 router.get("/:customer_id/orders", customersController.handleGetCustomersOrders);
 router.get("/:customer_id", customersController.handleGetCustomerByID);
 
+router.put("/:customer_id", customersController.handleUpdateCustomerByID);
+
 router.delete("/:customer_id", customersController.hanleDeleteCustomerByID);
 
 router.get("*", (req, res) => {

@@ -15,6 +15,19 @@ const customersService = {
 		return customersModel.getCustomersByIDs(customer_ids);
 	},
 
+	updateCustomerByID: (customer_id, customer) => {
+		return customersService.getCustomersByIDs([customer_id])
+			.then(customers => {
+				if (customers && customers.length) {
+					return customersModel.updateCustomerByID(customer_id, customer);
+				} else {
+					throw {
+						"client_message": `Customer ${customer_id} doesn't exist`
+					};
+				}
+			});
+	},
+
 	deleteCustomerByID: customer_id => {
 		return customersService.getCustomersByIDs([customer_id])
 			.then(customers => {
