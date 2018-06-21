@@ -13,6 +13,19 @@ const customersService = {
 
 	getCustomersByIDs: customer_ids => {
 		return customersModel.getCustomersByIDs(customer_ids);
+	},
+
+	deleteCustomerByID: customer_id => {
+		return customersService.getCustomersByIDs([customer_id])
+			.then(customers => {
+				if (customers && customers.length) {
+					return customersModel.deleteCustomerByID(customer_id);
+				} else {
+					throw {
+						"client_message": `Customer ${customer_id} doesn't exist`
+					};
+				}
+			});
 	}
 };
 

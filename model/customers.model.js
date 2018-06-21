@@ -17,6 +17,15 @@ const customersModel = {
 				WHERE is_enabled = 1`;
 			return dbUtil.runQuery(query, []);
 		}
+	},
+
+	deleteCustomerByID: customer_id => {
+		const query =
+			`UPDATE ${TABLE_NAME.CUSTOMERS}
+			SET is_enabled = 0 WHERE id = ?`;
+		const values = [customer_id];
+		return dbUtil.runQuery(query, values)
+			.then(() => customersModel.getCustomersByIDs([customer_id]));
 	}
 };
 

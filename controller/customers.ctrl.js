@@ -41,6 +41,30 @@ const customersController = {
 				res.status(500).send("Error");
 			});
 	},
+
+	hanleDeleteCustomerByID: (req, res) => {
+		const startTime = Date.now();
+		const { customer_id } = req.params;
+		customersService.deleteCustomerByID(customer_id)
+			.then(response => {
+				const return_data = {
+					total: response.length,
+					message: "OK",
+					customers: response
+				};
+				const endTime = Date.now();
+				logger.info("hanleDeleteCustomerByID succeeded in: ", endTime - startTime, "ms");
+				res.status(200).send(return_data);
+			})
+			.catch(err => {
+				logger.error("Error hanleDeleteCustomerByID: ", err);
+				if (err.client_message) {
+					res.status(500).send(err.client_message);
+				} else {
+					res.status(500).send("Error");
+				}
+			});
+	},
 };
 
 module.exports = customersController;
