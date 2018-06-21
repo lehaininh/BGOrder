@@ -72,6 +72,15 @@ const ordersModel = {
 			return Promise.resolve([]);
 		}
 	},
+
+	updateOrder: (order_id, order) => {
+		const query =
+			`UPDATE ${TABLE_NAME.ORDERS}
+			SET customer_id = ?, address_id = ?, item_id = ? WHERE id = ?`;
+		const values = [order.customer_id, order.address_id, order.item_id, order_id];
+		return dbUtil.runQuery(query, values)
+			.then(() => ordersModel.getOrderByOrderIDs([order_id]));
+	}
 };
 
 module.exports = ordersModel;

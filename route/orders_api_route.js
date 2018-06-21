@@ -4,6 +4,7 @@ const logger = require("../util/logger.js");
 const ordersController = require("../controller/orders.ctrl.js");
 
 router.get("/:order_id", ordersController.handleGetOrderByOrderID);
+router.put("/:order_id", ordersController.handleUpdateOrderByID);
 
 router.post("/", ordersController.handleCreateOrder);
 
