@@ -1,7 +1,31 @@
+const shortID = require("shortid");
 const dbUtil = require("../util/mysql.js");
 const TABLE_NAME = require("../util/mysql.js").TABLE_NAME;
 
 const ordersModel = {
+	createOrders: orders => {
+		if (orders && orders.length) {
+			const placeholder = orders.map(() => "(?, ?, ?, ?)").join(",");
+			const query =
+				`INSERT INTO ${TABLE_NAME.ORDERS} (id, customer_id, address_id, item_id)
+				VALUES ${placeholder}`;
+			const values = [];
+			const order_ids = [];
+			orders.forEach(order => {
+				const order_id = shortID.generate();
+				order_ids.push(order_id);
+				values.push(order_id);
+				values.push(order.customer_id);
+				values.push(order.address_id);
+				values.push(order.item_id);
+			});
+			return dbUtil.runQuery(query, values)
+				.then(() => ordersModel.getOrderByOrderIDs(order_ids));
+		} else {
+			return Promise.resolve([]);
+		}
+	},
+
 	getOrderByOrderIDs: order_ids => {
 		if (order_ids && order_ids.length) {
 			if (order_ids.length === 0) return Promise.resolve([]);

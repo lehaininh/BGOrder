@@ -9,6 +9,10 @@ const ordersService = {
 				return populateSerivce.populateInfoForOrders(orders);
 			});
 	},
+
+	createOrder: order => {
+		return ordersModel.createOrders([order]);
+	}
 };
 
 module.exports = ordersService;
