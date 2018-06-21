@@ -74,9 +74,9 @@ chai.use(chaiHttp);
 //});
 
 describe("Reports APIs", () => {
-	it("should get default report", (done) => {
+	it("should get default report, right order", (done) => {
 		chai.request(server)
-			.get("/v1/reports")
+			.get("/v1/reports/default")
 			.end((err, res) => {
 				res.should.have.status(200);
 				res.body.should.be.a("object");
@@ -85,6 +85,19 @@ describe("Reports APIs", () => {
 				res.body.should.have.property("message").eql("OK");
 				res.body.items.should.be.a("array");
 				res.body.items.length.should.be.eql(res.body.total);
+				const items = res.body.items;
+				let right_order = true;
+				items.forEach((item, idx) => {
+					if (idx) {
+						if ((items[idx].order_time > items[idx-1].order_time) || (
+							(items[idx].order_time === items[idx-1].order_time) &&
+							(items[idx].item_name < items[idx-1].item_name)
+						)) {
+							right_order = false;
+						}
+					}
+				});
+				right_order.should.be.eql(true);
 				done();
 			});
 	});
