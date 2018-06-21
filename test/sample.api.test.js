@@ -48,4 +48,27 @@ describe("Order APIs", () => {
 				done();
 			});
 	});
+	it("should give error on deleting order with ID = Hk2kqZEW", (done) => {
+		chai.request(server)
+			.delete("/v1/orders/Hk2kqZEW")
+			.end((err, res) => {
+				res.should.have.status(500);
+				res.error.text.should.be.a("string");
+				done();
+			});
+	});
+	it("should delete an order with ID = Hk2kqZEWX", (done) => {
+		chai.request(server)
+			.delete("/v1/orders/Hk2kqZEWX")
+			.end((err, res) => {
+				res.should.have.status(200);
+				res.body.should.be.a("object");
+				res.body.should.have.property("total");
+				res.body.should.have.property("orders");
+				res.body.should.have.property("message").eql("OK");
+				res.body.orders.should.be.a("array");
+				res.body.orders.length.should.be.eql(0);
+				done();
+			});
+	});
 });
