@@ -19,7 +19,7 @@ With separated tables it comes with a lot of 'JOIN' query, or everything needs t
     -> There's no 2nd design. I always design DB this way, it fits the 2nd requirements already. My most important thing when designing DB is always **'single source of truth'**
     
 - Node/JS pros:
-    - It's a interpreted language. Meaning I don't need an IDE (I use Vim mostly). 2 other languages I know if Pascal and C#, both compiled language, not a fan.
+    - It's a interpreted language. Meaning I don't need an IDE (I use Vim mostly). 2 other languages I know are Pascal and C#, both are compiled language, not a fan.
     - Easy to learn. Sample reason I picked Node when I got back to programming.
     - Basically same piece of code on both server and client side.
     - Asynchronous IO helps with request handling.
