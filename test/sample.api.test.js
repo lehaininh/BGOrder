@@ -141,4 +141,16 @@ describe("Customers APIs", () => {
 				done();
 			});
 	});
+	it("should get user spending with ID = HkTEU-N-m", (done) => {
+		chai.request(server)
+			.get("/v1/customers/HkTEU-N-m/spending")
+			.end((err, res) => {
+				res.should.have.status(200);
+				res.body.should.be.a("object");
+				res.body.should.not.have.property("total");
+				res.body.should.have.property("spending");
+				res.body.spending.should.be.a("object");
+				done();
+			});
+	});
 });
