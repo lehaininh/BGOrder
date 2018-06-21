@@ -21,6 +21,26 @@ const customersController = {
 				res.status(500).send("Error");
 			});
 	},
+
+	handleGetCustomerByID: (req, res) => {
+		const startTime = Date.now();
+		const { customer_id } = req.params;
+		customersService.getCustomersByIDs([customer_id])
+			.then(response => {
+				const return_data = {
+					total: response.length,
+					message: "OK",
+					customers: response
+				};
+				const endTime = Date.now();
+				logger.info("handleGetCustomerByID succeeded in: ", endTime - startTime, "ms");
+				res.status(200).send(return_data);
+			})
+			.catch(err => {
+				logger.error("Error handleGetCustomerByID: ", err);
+				res.status(500).send("Error");
+			});
+	},
 };
 
 module.exports = customersController;

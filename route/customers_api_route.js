@@ -4,6 +4,7 @@ const logger = require("../util/logger.js");
 const customersController = require("../controller/customers.ctrl.js");
 
 router.get("/:customer_id/orders", customersController.handleGetCustomersOrders);
+router.get("/:customer_id", customersController.handleGetCustomerByID);
 
 router.get("*", (req, res) => {
 	logger.error("Calling customers API without correct path");
